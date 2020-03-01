@@ -1,0 +1,142 @@
+/*
+Perform push and pop operations on a deque. Implement Deque and avoid using inbuilt library.
+
+Input Format
+
+First line of input contains T - number of operations. Its followed by T lines, each line contains either "push_front x" or "push_back x" or "pop_front" or "pop_back".
+
+Constraints
+
+1 <= T <= 10000
+-100 <= x <= 100
+
+Output Format
+
+For each of "pop_front" and "pop_back" operations, print the popped element, separated by newline. If the deque is empty, print "Empty".
+
+Sample Input 0
+
+10
+push_back 5
+pop_front
+pop_front
+push_back 10
+push_front -15
+pop_back
+push_back -10
+push_back 20
+pop_front
+pop_front
+Sample Output 0
+
+5
+Empty
+10
+-15
+-10
+*/
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Implement_DeQueue {
+class node 
+    { 
+        int data; 
+        node next;
+        node prev;
+        // Constructor to create a new node 
+         public node(int data) 
+        {
+             this.data = data;
+             this.next = null;
+             this.prev=null; 
+        } 
+    } 
+    public static void main(String[] args) {
+        int cases;
+           Scanner sc = new Scanner(System.in);
+            cases=sc.nextInt();
+            node front=null;
+            node rear=null;
+            node temp=null;
+            for(int i=0;i<cases;i++)
+            {
+            String input=sc.next();
+            String input1="push_front";
+            String input2="push_back";
+            String input3="pop_front";
+            String input4="pop_back";
+      if(input.equals(input1))
+      {
+          int ele=sc.nextInt();//if push then read ele
+           Solution s=new Solution();
+           Solution.node newn = s.new node(ele); 
+          if(front==null)   //no elements
+          rear=front=newn;
+          else
+          {
+            newn.next=front;
+            front.prev=newn;
+            front=newn;
+          }
+      }
+        else if(input.equals(input2)) 
+       {
+           int ele=sc.nextInt();//if push then read ele
+            Solution s=new Solution();
+           Solution.node newn = s.new node(ele);
+           if(rear==null)   //no elements
+           front=rear=newn;
+           else
+           {
+               rear.next=newn;
+               newn.prev=rear;
+               rear=newn;
+           }
+       }
+       else if(input.equals(input3))
+       {
+           if(front==null)
+               System.out.println("Empty");//no elements
+           else
+           {
+               temp=front;
+               System.out.println(temp.data);
+               front=front.next;
+               if(front==null) //one ele
+               {
+                   rear=null;
+               }
+               else           //many ele
+                   front.prev=null;
+           }
+       }
+      else if(input.equals(input4))
+      {
+          if(rear==null)
+             System.out.println("Empty");  //no ele
+          else
+          {
+              temp=rear;
+              System.out.println(temp.data);
+              rear=rear.prev;
+              if(rear==null)
+                  front=null; //one ele
+              else
+                  rear.next=null;  //many ele
+              
+          }
+      }
+        
+       
+        
+        
+              }//test cases  
+        
+        
+    }
+}
